@@ -1,0 +1,59 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+build/
+.pub-cache/
+.pub/
+.melos_tool/
+
+# Flutter generated plugin registrant
+**/GeneratedPluginRegistrant.*
+
+# Android related
+android/.gradle/
+android/captures/
+android/app/generated/
+android/app/*.iml
+android/gradlew
+android/gradlew.bat
+android/local.properties
+android/app/google-services.json
+
+# iOS/macOS related
+ios/Flutter/flutter_export_environment.sh
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Generated.xcconfig
+ios/Runner/GeneratedPluginRegistrant.*
+ios/build/
+macos/Flutter/GeneratedPluginRegistrant.*
+macos/Pods/
+macos/.symlinks/
+macos/build/
+
+# Web related
+web/.dart_tool/
+
+# Windows related
+windows/flutter/
+windows/Runner/GeneratedPluginRegistrant.*
+windows/.vs/
+
+# Linux related
+linux/flutter/
+linux/Runner/GeneratedPluginRegistrant.*
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+
+# IntelliJ / Android Studio
+*.iml
+.idea/
+
+# Logs
+*.log
+
+# Exceptions allowed
+!pubspec.lock
