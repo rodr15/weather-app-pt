@@ -57,8 +57,6 @@ extension DayMapper on Day {
       conditions: conditions,
       description: description,
       icon: icon,
-      stations: stations,
-      source: source,
       events: events?.map((event) => event.toEvent()).toList(),
     );
   }

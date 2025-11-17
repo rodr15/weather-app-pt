@@ -8,7 +8,7 @@ class VisualCrossingApiClient {
     String longitude,
   ) async {
     final uri = Uri.parse(
-      '${VisualCrossingConfig.baseUrl}/$latitude,$longitude?key=${Env.visualCrossingApiKey}',
+      '${VisualCrossingConfig.baseUrl}/$latitude,$longitude?key=${Env.visualCrossingApiKey}&lang=es',
     );
 
     final response = await http.get(uri);

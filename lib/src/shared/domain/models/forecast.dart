@@ -37,8 +37,6 @@ class Forecast {
     this.conditions,
     this.description,
     this.icon,
-    this.stations,
-    this.source,
     this.events,
   });
 
@@ -140,12 +138,6 @@ class Forecast {
 
   /// Icon identifier for the weather condition.
   final String? icon;
-
-  /// List of station IDs used for the data.
-  final List<String>? stations;
-
-  /// Data source.
-  final String? source;
 
   /// List of weather events (e.g., hail).
   final List<Event>? events;
