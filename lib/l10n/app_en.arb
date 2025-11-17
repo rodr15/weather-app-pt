@@ -1,5 +1,10 @@
 {
     "@@locale": "en",
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "chanceOfRain": "Chance of rain",
+    "uvIndex": "UV Index",
+    "windSpeend": "Wind speed"
 }

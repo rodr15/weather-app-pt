@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_pt/l10n/app_localizations.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_daily_detail_item.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
+import 'package:weather_app_pt/src/shared/extension/date.extension.dart';
+import 'package:weather_app_pt/src/shared/utils/time_converter.dart';
 
 /// A widget that displays key astronomical details for the day,
 /// including sunrise, sunset, and moon phase.
@@ -28,8 +31,11 @@ class WeatherDailyDetails extends StatelessWidget {
         WeatherDailyDetailItem(
           icon: Icons.sunny,
           iconColor: Colors.orange,
-          label: 'Amanecer',
-          value: forecast.sunrise ?? 'N/A',
+          label: AppLocalizations.of(context)!.sunrise,
+          value: TimeConverter.parseTime(
+            context,
+            forecast.sunrise ?? '',
+          ).toFormattedTime(context),
         ),
 
         // Visual Separator
@@ -44,8 +50,11 @@ class WeatherDailyDetails extends StatelessWidget {
         WeatherDailyDetailItem(
           icon: Icons.nights_stay,
           iconColor: Colors.deepPurple,
-          label: 'Atardecer',
-          value: forecast.sunset ?? 'N/A',
+          label: AppLocalizations.of(context)!.sunset,
+          value: TimeConverter.parseTime(
+            context,
+            forecast.sunset ?? '',
+          ).toFormattedTime(context),
         ),
 
         VerticalDivider(

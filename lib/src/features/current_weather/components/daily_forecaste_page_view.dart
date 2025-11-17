@@ -4,6 +4,7 @@ import 'package:weather_app_pt/src/features/current_weather/application/daily_fo
 import 'package:weather_app_pt/src/features/current_weather/application/selected_day_index.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/daily_datils_card.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/dot.dart';
+import 'package:weather_app_pt/src/shared/extension/date.extension.dart';
 
 /// This watches the [dailyForecastsProvider] for the data and synchronizes
 /// the current page index with the [selectedDayIndexProvider].
@@ -63,11 +64,18 @@ class _DailyForecastsPageViewState
 
         return Column(
           mainAxisSize: MainAxisSize.min,
+
           children: [
-            Text(forecasts[selectedIndex].datetime.toString()),
+            Text(
+              forecasts[selectedIndex].datetime?.toFriendlyDate(context) ?? '',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Expanded(
               child: SizedBox(
-                height: 600,
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: forecasts.length,

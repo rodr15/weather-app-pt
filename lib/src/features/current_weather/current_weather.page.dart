@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app_pt/l10n/app_localizations.dart';
 import 'package:weather_app_pt/src/features/current_weather/application/selected_day_index.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/application/weather_data.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/background.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/blur_container.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/daily_forecaste_page_view.dart';
+import 'package:weather_app_pt/src/features/current_weather/components/weahter_detail_row.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_detail_item.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_icon.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
@@ -151,50 +153,7 @@ class _SelectedForecastInfo extends StatelessWidget {
             ),
           ),
 
-          BlurContainer(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                WeatherDetailItem(
-                  iconData: WeatherIconId.rain.materialIcon,
-                  iconColor: WeatherIconId.rain.iconColor,
-                  value:
-                      '${(forecast.precipprob ?? 0 * 100).toStringAsFixed(0).toString()} ',
-                  valueSuffix: '%',
-                  label: 'Chance of\nRain',
-                ),
-
-                VerticalDivider(
-                  color: Colors.white.withOpacity(0.4),
-                  thickness: 1,
-                  indent: 10,
-                  endIndent: 10,
-                ),
-
-                WeatherDetailItem(
-                  iconData: WeatherIconId.clearDay.materialIcon,
-                  iconColor: WeatherIconId.clearDay.iconColor,
-                  value: forecast?.uvindex.toString() ?? '0',
-                  label: 'UV Index',
-                ),
-
-                VerticalDivider(
-                  color: Colors.white.withOpacity(0.4),
-                  thickness: 1,
-                  indent: 10,
-                  endIndent: 10,
-                ),
-
-                WeatherDetailItem(
-                  iconData: WeatherIconId.wind.materialIcon,
-                  iconColor: WeatherIconId.wind.iconColor,
-                  value: forecast?.windspeed.toString() ?? '0.0',
-                  valueSuffix: ' m/s',
-                  label: 'Wind\nSpeed',
-                ),
-              ],
-            ),
-          ),
+          WeatherDetailsRow(forecast: forecast),
 
           const Spacer(),
           const Expanded(
