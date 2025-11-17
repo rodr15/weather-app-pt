@@ -158,7 +158,8 @@ class _SelectedForecastInfo extends StatelessWidget {
                 WeatherDetailItem(
                   iconData: WeatherIconId.rain.materialIcon,
                   iconColor: WeatherIconId.rain.iconColor,
-                  value: forecast?.precipprob.toString() ?? '0',
+                  value:
+                      '${(forecast.precipprob ?? 0 * 100).toStringAsFixed(0).toString()} ',
                   valueSuffix: '%',
                   label: 'Chance of\nRain',
                 ),

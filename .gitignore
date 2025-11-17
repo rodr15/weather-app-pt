@@ -64,3 +64,6 @@ env.g.dart
 
 #Dummy data
 */dummy_data
+
+#localization
+*/l10n/*.dart

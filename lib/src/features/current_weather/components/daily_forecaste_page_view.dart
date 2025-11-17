@@ -36,8 +36,6 @@ class _DailyForecastsPageViewState
 
   /// Callback executed when the user manually changes the page (swiping).
   void _onPageChanged(int newIndex) {
-    // 1. Update the Riverpod state whenever the page changes.
-    // This action changes the 'selectedDayIndexProvider' for the entire app.
     ref.read(selectedDayIndexProvider.notifier).setIndex(newIndex);
   }
 
@@ -66,6 +64,7 @@ class _DailyForecastsPageViewState
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(forecasts[selectedIndex].datetime.toString()),
             Expanded(
               child: SizedBox(
                 height: 600,
@@ -82,7 +81,7 @@ class _DailyForecastsPageViewState
             ),
 
             Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
