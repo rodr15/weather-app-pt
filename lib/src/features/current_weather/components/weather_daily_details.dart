@@ -13,18 +13,17 @@ import 'package:weather_app_pt/src/shared/utils/time_converter.dart';
 class WeatherDailyDetails extends StatelessWidget {
   /// Creates a [WeatherDailyDetails] instance.
   const WeatherDailyDetails({
-    super.key,
     required this.forecast,
+    super.key,
   });
 
-  /// The daily forecast data used to populate the sunrise, sunset, and moon phase times.
+  /// The daily forecast data used to populate the sunrise, sunset, and moon
+  /// phase times.
   final Forecast forecast;
 
   /// Builds the row containing the astronomical details.
   @override
   Widget build(BuildContext context) {
-    // You can use a common container (like BlurContainer from before)
-    // or a simple Card/Container for grouping.
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [

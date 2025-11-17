@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app_pt/l10n/app_localizations.dart';
 import 'package:weather_app_pt/src/features/current_weather/application/selected_day_index.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/application/weather_data.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/background.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/blur_container.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/daily_forecaste_page_view.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weahter_detail_row.dart';
-import 'package:weather_app_pt/src/features/current_weather/components/weather_detail_item.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_icon.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
 
@@ -106,7 +104,7 @@ class _SelectedForecastInfo extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      '${forecast?.temp.toString() ?? 'N/A'}°',
+                      '${forecast.temp}°',
                       style: TextStyle(
                         color: weatherCondition.iconColor.withAlpha(
                           255,
@@ -127,7 +125,6 @@ class _SelectedForecastInfo extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Icon(
                     Icons.arrow_upward_outlined,
@@ -135,7 +132,7 @@ class _SelectedForecastInfo extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '${forecast?.tempmax.toString() ?? 'N/A'}°',
+                    '${forecast.tempmax}°',
                     style: const TextStyle(color: Colors.white),
                   ),
                   const SizedBox(width: 8),
@@ -145,7 +142,7 @@ class _SelectedForecastInfo extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '${forecast?.tempmin.toString() ?? 'N/A'}°',
+                    '${forecast.tempmin}°',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ],

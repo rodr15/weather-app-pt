@@ -8,11 +8,7 @@ import 'package:flutter/material.dart';
 class WeatherDailyDetailItem extends StatelessWidget {
   /// Creates a [WeatherDailyDetailItem] instance.
   const WeatherDailyDetailItem({
-    super.key,
-    required this.icon,
-    required this.iconColor,
-    required this.label,
-    required this.value,
+    required this.icon, required this.iconColor, required this.label, required this.value, super.key,
   });
 
   /// The icon data to display at the top of the item.

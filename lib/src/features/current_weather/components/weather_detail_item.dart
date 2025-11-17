@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 class WeatherDetailItem extends StatelessWidget {
   /// Creates a [WeatherDetailItem].
   const WeatherDetailItem({
-    super.key,
-    required this.iconData,
-    required this.iconColor,
-    required this.value,
-    required this.label,
+    required this.iconData, required this.iconColor, required this.value, required this.label, super.key,
     this.valueSuffix = '',
   });
 

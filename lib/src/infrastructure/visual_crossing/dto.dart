@@ -547,7 +547,7 @@ class Hour {
   });
 
   /// Creates an [Hour] instance from a JSON map.
-  factory Hour.fromJson(Map<String, dynamic> json) => Hour(
+  factory Hour.fromJson() => Hour(
     // ... implementación de fromJson
   );
 

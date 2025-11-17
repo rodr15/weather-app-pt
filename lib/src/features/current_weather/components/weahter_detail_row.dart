@@ -10,8 +10,7 @@ import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
 class WeatherDetailsRow extends StatelessWidget {
   /// Creates a row to display weather details for a given forecast.
   const WeatherDetailsRow({
-    super.key,
-    required this.forecast,
+    required this.forecast, super.key,
   });
 
   /// The forecast data model used to populate the details.

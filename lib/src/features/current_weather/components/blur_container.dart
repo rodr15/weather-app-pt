@@ -32,8 +32,8 @@ class BlurContainer extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
+              horizontal: 16,
+              vertical: 8,
             ),
             child: child,
           ),
