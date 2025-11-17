@@ -7,7 +7,7 @@ part 'env.g.dart';
 /// The actual values are securely loaded from the .env file
 /// and injected by the 'envied' package.
 abstract class Env {
-  @EnviedField(varName: 'WEATHERKEY')
+  @EnviedField(varName: 'VISUALCROSSINGAPIKEY')
   /// visualCrossing API KEY
   static const String visualCrossingApiKey = _Env.visualCrossingApiKey;
 }

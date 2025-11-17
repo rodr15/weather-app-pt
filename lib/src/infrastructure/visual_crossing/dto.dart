@@ -1,5 +1,36 @@
 import 'dart:convert';
 
+// --- Utility Classes MUST BE DEFINED FIRST ---
+
+/// Defines the possible types of weather events reported by the API.
+enum EventTypeApi {
+  /// Indicates hail events.
+  HAIL,
+}
+
+/// A utility class for mapping string values to enum values and vice versa.
+class EnumValues<T> {
+  /// Creates an [EnumValues] instance.
+  EnumValues(this.map);
+
+  /// The map containing string keys and enum values.
+  final Map<String, T> map;
+
+  /// Returns the inverse map, calculated on demand.
+  Map<T, String> get reverse {
+    // Only calculate the reverse map once
+    return map.map((k, v) => MapEntry(v, k));
+  }
+}
+
+/// Utility for mapping API event string values to [EventTypeApi].
+// This definition must come BEFORE EventApi uses it in its fromJson factory.
+final EnumValues<EventTypeApi> typeValues = EnumValues({
+  'hail': EventTypeApi.HAIL,
+});
+
+// --- Model Classes follow ---
+
 /// Converts a JSON string to a [WeatherDto] object.
 WeatherDto weatherDtoFromJson(String str) =>
     WeatherDto.fromJson(json.decode(str) as Map<String, dynamic>);
@@ -24,17 +55,13 @@ class WeatherDto {
 
   /// Creates a [WeatherDto] instance from a JSON map.
   factory WeatherDto.fromJson(Map<String, dynamic> json) => WeatherDto(
-    queryCost: json['queryCost'] as int?,
-    latitude: json['latitude'] is num
-        ? (json['latitude'] as num).toDouble()
-        : null,
-    longitude: json['longitude'] is num
-        ? (json['longitude'] as num).toDouble()
-        : null,
+    queryCost: (json['queryCost'] as num?)?.toDouble(),
+    latitude: (json['latitude'] as num?)?.toDouble(),
+    longitude: (json['longitude'] as num?)?.toDouble(),
     resolvedAddress: json['resolvedAddress'] as String?,
     address: json['address'] as String?,
     timezone: json['timezone'] as String?,
-    tzoffset: json['tzoffset'] as int?,
+    tzoffset: (json['tzoffset'] as num?)?.toDouble(),
     days: json['days'] == null
         ? <Day>[]
         : List<Day>.from(
@@ -55,7 +82,7 @@ class WeatherDto {
   );
 
   /// The cost associated with the query.
-  final int? queryCost;
+  final double? queryCost;
 
   /// The latitude of the requested location.
   final double? latitude;
@@ -73,7 +100,7 @@ class WeatherDto {
   final String? timezone;
 
   /// The timezone offset.
-  final int? tzoffset;
+  final double? tzoffset;
 
   /// The list of daily weather forecasts.
   final List<Day>? days;
@@ -91,7 +118,7 @@ class WeatherDto {
     'timezone': timezone,
     'tzoffset': tzoffset,
     'days': days == null
-        ? <String>[]
+        ? <dynamic>[]
         : List<dynamic>.from(days!.map((x) => x.toJson())),
     'stations': stations == null
         ? null
@@ -148,71 +175,39 @@ class Day {
     datetime: json['datetime'] == null
         ? null
         : DateTime.tryParse(json['datetime'] as String),
-    datetimeEpoch: json['datetimeEpoch'] as int?,
-    tempmax: json['tempmax'] is num
-        ? (json['tempmax'] as num).toDouble()
-        : null,
-    tempmin: json['tempmin'] is num
-        ? (json['tempmin'] as num).toDouble()
-        : null,
-    temp: json['temp'] is num ? (json['temp'] as num).toDouble() : null,
-    feelslikemax: json['feelslikemax'] is num
-        ? (json['feelslikemax'] as num).toDouble()
-        : null,
-    feelslikemin: json['feelslikemin'] is num
-        ? (json['feelslikemin'] as num).toDouble()
-        : null,
-    feelslike: json['feelslike'] is num
-        ? (json['feelslike'] as num).toDouble()
-        : null,
-    dew: json['dew'] is num ? (json['dew'] as num).toDouble() : null,
-    humidity: json['humidity'] is num
-        ? (json['humidity'] as num).toDouble()
-        : null,
-    precip: json['precip'] is num ? (json['precip'] as num).toDouble() : null,
-    precipprob: json['precipprob'] as int?,
-    precipcover: json['precipcover'] is num
-        ? (json['precipcover'] as num).toDouble()
-        : null,
+    datetimeEpoch: (json['datetimeEpoch'] as num?)?.toDouble(),
+    tempmax: (json['tempmax'] as num?)?.toDouble(),
+    tempmin: (json['tempmin'] as num?)?.toDouble(),
+    temp: (json['temp'] as num?)?.toDouble(),
+    feelslikemax: (json['feelslikemax'] as num?)?.toDouble(),
+    feelslikemin: (json['feelslikemin'] as num?)?.toDouble(),
+    feelslike: (json['feelslike'] as num?)?.toDouble(),
+    dew: (json['dew'] as num?)?.toDouble(),
+    humidity: (json['humidity'] as num?)?.toDouble(),
+    precip: (json['precip'] as num?)?.toDouble(),
+    precipprob: (json['precipprob'] as num?)?.toDouble(),
+    precipcover: (json['precipcover'] as num?)?.toDouble(),
     preciptype: json['preciptype'] == null
         ? <String>[]
         : List<String>.from(
             (json['preciptype'] as Iterable<dynamic>).map((x) => x as String),
           ),
-    snow: json['snow'] as int?,
-    snowdepth: json['snowdepth'] as int?,
-    windgust: json['windgust'] is num
-        ? (json['windgust'] as num).toDouble()
-        : null,
-    windspeed: json['windspeed'] is num
-        ? (json['windspeed'] as num).toDouble()
-        : null,
-    winddir: json['winddir'] is num
-        ? (json['winddir'] as num).toDouble()
-        : null,
-    pressure: json['pressure'] is num
-        ? (json['pressure'] as num).toDouble()
-        : null,
-    cloudcover: json['cloudcover'] is num
-        ? (json['cloudcover'] as num).toDouble()
-        : null,
-    visibility: json['visibility'] is num
-        ? (json['visibility'] as num).toDouble()
-        : null,
-    solarradiation: json['solarradiation'] is num
-        ? (json['solarradiation'] as num).toDouble()
-        : null,
-    solarenergy: json['solarenergy'] is num
-        ? (json['solarenergy'] as num).toDouble()
-        : null,
-    uvindex: json['uvindex'] as int?,
+    snow: (json['snow'] as num?)?.toDouble(),
+    snowdepth: (json['snowdepth'] as num?)?.toDouble(),
+    windgust: (json['windgust'] as num?)?.toDouble(),
+    windspeed: (json['windspeed'] as num?)?.toDouble(),
+    winddir: (json['winddir'] as num?)?.toDouble(),
+    pressure: (json['pressure'] as num?)?.toDouble(),
+    cloudcover: (json['cloudcover'] as num?)?.toDouble(),
+    visibility: (json['visibility'] as num?)?.toDouble(),
+    solarradiation: (json['solarradiation'] as num?)?.toDouble(),
+    solarenergy: (json['solarenergy'] as num?)?.toDouble(),
+    uvindex: (json['uvindex'] as num?)?.toDouble(),
     sunrise: json['sunrise'] as String?,
-    sunriseEpoch: json['sunriseEpoch'] as int?,
+    sunriseEpoch: (json['sunriseEpoch'] as num?)?.toDouble(),
     sunset: json['sunset'] as String?,
-    sunsetEpoch: json['sunsetEpoch'] as int?,
-    moonphase: json['moonphase'] is num
-        ? (json['moonphase'] as num).toDouble()
-        : null,
+    sunsetEpoch: (json['sunsetEpoch'] as num?)?.toDouble(),
+    moonphase: (json['moonphase'] as num?)?.toDouble(),
     conditions: json['conditions'] as String?,
     description: json['description'] as String?,
     icon: json['icon'] as String?,
@@ -235,7 +230,7 @@ class Day {
   final DateTime? datetime;
 
   /// The epoch time of the forecast date.
-  final int? datetimeEpoch;
+  final double? datetimeEpoch;
 
   /// Maximum temperature.
   final double? tempmax;
@@ -265,7 +260,7 @@ class Day {
   final double? precip;
 
   /// Probability of precipitation.
-  final int? precipprob;
+  final double? precipprob;
 
   /// Precipitation coverage percentage.
   final double? precipcover;
@@ -274,10 +269,10 @@ class Day {
   final List<String>? preciptype;
 
   /// Snowfall amount.
-  final int? snow;
+  final double? snow;
 
   /// Snow depth.
-  final int? snowdepth;
+  final double? snowdepth;
 
   /// Wind gust speed.
   final double? windgust;
@@ -304,19 +299,19 @@ class Day {
   final double? solarenergy;
 
   /// UV index.
-  final int? uvindex;
+  final double? uvindex;
 
   /// Time of sunrise.
   final String? sunrise;
 
   /// Epoch time of sunrise.
-  final int? sunriseEpoch;
+  final double? sunriseEpoch;
 
   /// Time of sunset.
   final String? sunset;
 
   /// Epoch time of sunset.
-  final int? sunsetEpoch;
+  final double? sunsetEpoch;
 
   /// Moon phase.
   final double? moonphase;
@@ -341,10 +336,7 @@ class Day {
 
   /// Converts the [Day] instance to a JSON map.
   Map<String, dynamic> toJson() => {
-    'datetime':
-        ///
-        // ignore: lines_longer_than_80_chars
-        '${datetime!.year.toString().padLeft(4, '0')}-${datetime!.month.toString().padLeft(2, '0')}-${datetime!.day.toString().padLeft(2, '0')}',
+    'datetime': datetime?.toIso8601String().split('T').first,
     'datetimeEpoch': datetimeEpoch,
     'tempmax': tempmax,
     'tempmin': tempmin,
@@ -358,7 +350,7 @@ class Day {
     'precipprob': precipprob,
     'precipcover': precipcover,
     'preciptype': preciptype == null
-        ? <String>[]
+        ? <dynamic>[]
         : List<dynamic>.from(preciptype!.map((x) => x)),
     'snow': snow,
     'snowdepth': snowdepth,
@@ -380,11 +372,11 @@ class Day {
     'description': description,
     'icon': icon,
     'stations': stations == null
-        ? <String>[]
+        ? <dynamic>[]
         : List<dynamic>.from(stations!.map((x) => x)),
     'source': source,
     'events': events == null
-        ? <String>[]
+        ? <dynamic>[]
         : List<dynamic>.from(events!.map((x) => x.toJson())),
   };
 }
@@ -408,26 +400,21 @@ class EventApi {
     datetime: json['datetime'] == null
         ? null
         : DateTime.tryParse(json['datetime'] as String),
-    datetimeEpoch: json['datetimeEpoch'] as int?,
+    datetimeEpoch: (json['datetimeEpoch'] as num?)?.toDouble(),
+    // This is where 'typeValues' is used. It is now defined above this class.
     type: typeValues.map[json['type'] as String],
-    latitude: json['latitude'] is num
-        ? (json['latitude'] as num).toDouble()
-        : null,
-    longitude: json['longitude'] is num
-        ? (json['longitude'] as num).toDouble()
-        : null,
-    distance: json['distance'] is num
-        ? (json['distance'] as num).toDouble()
-        : null,
+    latitude: (json['latitude'] as num?)?.toDouble(),
+    longitude: (json['longitude'] as num?)?.toDouble(),
+    distance: (json['distance'] as num?)?.toDouble(),
     desc: json['desc'] as String?,
-    size: json['size'] is num ? (json['size'] as num).toDouble() : null,
+    size: (json['size'] as num?)?.toDouble(),
   );
 
   /// Date and time of the event.
   final DateTime? datetime;
 
   /// Epoch time of the event.
-  final int? datetimeEpoch;
+  final double? datetimeEpoch;
 
   /// Type of the weather event.
   final EventTypeApi? type;
@@ -460,17 +447,6 @@ class EventApi {
   };
 }
 
-/// Defines the possible types of weather events reported by the API.
-enum EventTypeApi {
-  /// Indicates hail events.
-  HAIL,
-}
-
-/// Utility for mapping API event string values to [EventTypeApi].
-final EnumValues<EventTypeApi> typeValues = EnumValues({
-  'hail': EventTypeApi.HAIL,
-});
-
 /// Represents a weather station used to gather data for the forecast.
 class Station {
   /// Creates a [Station] instance.
@@ -487,22 +463,18 @@ class Station {
 
   /// Creates a [Station] instance from a JSON map.
   factory Station.fromJson(Map<String, dynamic> json) => Station(
-    distance: json['distance'] as int?,
-    latitude: json['latitude'] is num
-        ? (json['latitude'] as num).toDouble()
-        : null,
-    longitude: json['longitude'] is num
-        ? (json['longitude'] as num).toDouble()
-        : null,
-    useCount: json['useCount'] as int?,
+    distance: (json['distance'] as num?)?.toDouble(),
+    latitude: (json['latitude'] as num?)?.toDouble(),
+    longitude: (json['longitude'] as num?)?.toDouble(),
+    useCount: (json['useCount'] as num?)?.toDouble(),
     id: json['id'] as String?,
     name: json['name'] as String?,
-    quality: json['quality'] as int?,
-    contribution: json['contribution'] as int?,
+    quality: (json['quality'] as num?)?.toDouble(),
+    contribution: (json['contribution'] as num?)?.toDouble(),
   );
 
   /// Distance to the station from the queried location.
-  final int? distance;
+  final double? distance;
 
   /// Latitude of the station.
   final double? latitude;
@@ -511,7 +483,7 @@ class Station {
   final double? longitude;
 
   /// Number of times the station's data was used.
-  final int? useCount;
+  final double? useCount;
 
   /// The unique identifier of the station.
   final String? id;
@@ -520,10 +492,10 @@ class Station {
   final String? name;
 
   /// Quality score of the station's data.
-  final int? quality;
+  final double? quality;
 
   /// Contribution score of the station.
-  final int? contribution;
+  final double? contribution;
 
   /// Converts the [Station] instance to a JSON map.
   Map<String, dynamic> toJson() => {
@@ -536,21 +508,4 @@ class Station {
     'quality': quality,
     'contribution': contribution,
   };
-}
-
-/// A utility class for mapping string values to enum values and vice versa.
-class EnumValues<T> {
-  /// Creates an [EnumValues] instance.
-  EnumValues(this.map);
-
-  /// The map containing string keys and enum values.
-  final Map<String, T> map;
-
-  /// The inverse map, containing enum keys and string values.
-  late Map<T, String> reverseMap;
-
-  /// Returns the inverse map, initializing it if necessary.
-  Map<T, String> get reverse {
-    return map.map((k, v) => MapEntry(v, k));
-  }
 }

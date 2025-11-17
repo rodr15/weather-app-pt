@@ -44,7 +44,7 @@ class Forecast {
   final DateTime? datetime;
 
   /// The epoch time of the forecast date.
-  final int? datetimeEpoch;
+  final double? datetimeEpoch;
 
   /// Maximum temperature.
   final double? tempmax;
@@ -74,7 +74,7 @@ class Forecast {
   final double? precip;
 
   /// Probability of precipitation.
-  final int? precipprob;
+  final double? precipprob;
 
   /// Precipitation coverage percentage.
   final double? precipcover;
@@ -83,10 +83,10 @@ class Forecast {
   final List<String>? preciptype;
 
   /// Snowfall amount.
-  final int? snow;
+  final double? snow;
 
   /// Snow depth.
-  final int? snowdepth;
+  final double? snowdepth;
 
   /// Wind gust speed.
   final double? windgust;
@@ -113,19 +113,19 @@ class Forecast {
   final double? solarenergy;
 
   /// UV index.
-  final int? uvindex;
+  final double? uvindex;
 
   /// Time of sunrise.
   final String? sunrise;
 
   /// Epoch time of sunrise.
-  final int? sunriseEpoch;
+  final double? sunriseEpoch;
 
   /// Time of sunset.
   final String? sunset;
 
   /// Epoch time of sunset.
-  final int? sunsetEpoch;
+  final double? sunsetEpoch;
 
   /// Moon phase.
   final double? moonphase;

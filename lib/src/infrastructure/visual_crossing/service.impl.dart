@@ -15,6 +15,7 @@ class WeatherServiceImpl implements WeatherService {
     try {
       final json = await VisualCrossingApiClient()
           .getWeatherByLongitudeLatitude(longitude, latitude);
+
       final jsonResponse = convert.jsonDecode(json) as Map<String, dynamic>;
       final dto = WeatherDto.fromJson(jsonResponse);
       return dto.toPlace();

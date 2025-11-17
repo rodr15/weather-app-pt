@@ -30,7 +30,7 @@ class Place {
   final String? timezone;
 
   /// The timezone offset in hours.
-  final int? tzoffset;
+  final double? tzoffset;
 
   /// A list of daily weather forecasts for the location.
   final List<Forecast>? days;

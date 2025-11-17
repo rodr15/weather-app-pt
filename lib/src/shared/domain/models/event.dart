@@ -22,7 +22,7 @@ class Event {
   final DateTime? datetime;
 
   /// Epoch time of the event.
-  final int? datetimeEpoch;
+  final double? datetimeEpoch;
 
   /// Type of the weather event.
   final EventType? type;
