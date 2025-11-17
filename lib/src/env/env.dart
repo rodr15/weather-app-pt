@@ -8,6 +8,6 @@ part 'env.g.dart';
 /// and injected by the 'envied' package.
 abstract class Env {
   @EnviedField(varName: 'WEATHERKEY')
-  /// Weather API KEY
-  static const String weatherKey = _Env.weatherKey;
+  /// visualCrossing API KEY
+  static const String visualCrossingApiKey = _Env.visualCrossingApiKey;
 }

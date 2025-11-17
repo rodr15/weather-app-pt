@@ -61,3 +61,6 @@ linux/Runner/GeneratedPluginRegistrant.*
 # .env
 .env
 env.g.dart
+
+#Dummy data
+*/dummy_data
