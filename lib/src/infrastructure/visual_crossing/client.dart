@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app_pt/src/env/env.dart';
 import 'package:weather_app_pt/src/infrastructure/visual_crossing/config.dart';
@@ -8,9 +7,6 @@ class VisualCrossingApiClient {
     String latitude,
     String longitude,
   ) async {
-    return rootBundle.loadString(
-      'assets/dummy_data/5_days_forecast.json',
-    );
     final uri = Uri.parse(
       '${VisualCrossingConfig.baseUrl}/$latitude,$longitude?key=${Env.visualCrossingApiKey}&lang=es&unitGroup=metric',
     );
