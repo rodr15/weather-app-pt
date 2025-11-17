@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app_pt/src/features/current_weather/application/daily_forecasts.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/application/selected_day_index.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/application/weather_data.provider.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/background.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/blur_container.dart';
-import 'package:weather_app_pt/src/features/current_weather/components/weather_daily_details.dart';
+import 'package:weather_app_pt/src/features/current_weather/components/daily_forecaste_page_view.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_detail_item.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_icon.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app_pt/src/shared/domain/models/hour_forecast.dart';
 
 /// A Riverpod [ConsumerWidget] responsible for fetching and displaying the
 /// current weather details for the current place.
@@ -204,139 +200,6 @@ class _SelectedForecastInfo extends StatelessWidget {
             child: BlurContainer(child: DailyForecastsPageView()),
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// This watches the [dailyForecastsProvider] for the data and synchronizes
-/// the current page index with the [selectedDayIndexProvider].
-class DailyForecastsPageView extends ConsumerStatefulWidget {
-  /// Creates a page view for navigating through daily forecasts.
-  const DailyForecastsPageView({super.key});
-
-  @override
-  ConsumerState<DailyForecastsPageView> createState() =>
-      _DailyForecastsPageViewState();
-}
-
-class _DailyForecastsPageViewState
-    extends ConsumerState<DailyForecastsPageView> {
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize controller with the current state from the provider
-    final initialIndex = ref.read(selectedDayIndexProvider);
-    _pageController = PageController(initialPage: initialIndex);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  /// Callback executed when the user manually changes the page (swiping).
-  void _onPageChanged(int newIndex) {
-    // 1. Update the Riverpod state whenever the page changes.
-    // This action changes the 'selectedDayIndexProvider' for the entire app.
-    ref.read(selectedDayIndexProvider.notifier).setIndex(newIndex);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final forecastsAsyncValue = ref.watch(dailyForecastsProvider);
-    final selectedIndex = ref.watch(selectedDayIndexProvider);
-
-    if (_pageController.hasClients && _pageController.page != selectedIndex) {
-      _pageController.animateToPage(
-        selectedIndex,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
-    }
-
-    return forecastsAsyncValue.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) =>
-          Center(child: Text('Error loading data: $error')),
-      data: (forecasts) {
-        if (forecasts.isEmpty) {
-          return const Center(child: Text('No forecast data available.'));
-        }
-
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: SizedBox(
-                height: 600,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: forecasts.length,
-                  onPageChanged: _onPageChanged,
-                  itemBuilder: (context, index) {
-                    final dayForecast = forecasts[index];
-                    return DailyDetailsCard(forecast: dayForecast);
-                  },
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  forecasts.length,
-                  (index) => Dot(
-                    selected: index == selectedIndex,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class Dot extends StatelessWidget {
-  const Dot({required this.selected, super.key});
-  final bool selected;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 8,
-      width: 8,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: selected ? Colors.white : Colors.white.withOpacity(0.4),
-      ),
-    );
-  }
-}
-
-// NOTE: You must define a DailyDetailsCard widget to display the info for one day.
-class DailyDetailsCard extends StatelessWidget {
-  final Forecast forecast;
-  const DailyDetailsCard({required this.forecast, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final hourForecast = forecast.hourForecast;
-    print(forecast.hourForecast);
-    if (hourForecast == null || hourForecast.isEmpty) {
-      return WeatherDailyDetails(forecast: forecast);
-    }
-    return Center(
-      child: Text(
-        'Description: ${hourForecast.first}',
-        style: const TextStyle(color: Colors.white, fontSize: 20),
       ),
     );
   }
