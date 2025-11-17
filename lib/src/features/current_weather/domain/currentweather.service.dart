@@ -5,5 +5,8 @@ import 'package:weather_app_pt/src/shared/domain/models/place.dart';
 /// {@endtemplate}
 abstract class WeatherService {
   /// Fetches the current weather for the user's current location.
-  Future<Place> getCurrentPlaceWeather();
+  Future<Place> getCurrentPlaceWeather(
+    String latitude,
+    String longitude,
+  );
 }

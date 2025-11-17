@@ -3,9 +3,12 @@ import 'package:weather_app_pt/src/env/env.dart';
 import 'package:weather_app_pt/src/infrastructure/visual_crossing/config.dart';
 
 class VisualCrossingApiClient {
-  Future<String> getWeather(String city) async {
+  Future<String> getWeatherByLongitudeLatitude(
+    String latitude,
+    String longitude,
+  ) async {
     final uri = Uri.parse(
-      '${VisualCrossingConfig.baseUrl}/$city/last30days?key=${Env.visualCrossingApiKey}',
+      '${VisualCrossingConfig.baseUrl}/$latitude,$longitude?key=${Env.visualCrossingApiKey}',
     );
 
     final response = await http.get(uri);

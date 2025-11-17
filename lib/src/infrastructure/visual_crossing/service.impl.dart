@@ -8,9 +8,13 @@ import 'package:weather_app_pt/src/shared/domain/models/place.dart';
 
 class WeatherServiceImpl implements WeatherService {
   @override
-  Future<Place> getCurrentPlaceWeather() async {
+  Future<Place> getCurrentPlaceWeather(
+    String latitude,
+    String longitude,
+  ) async {
     try {
-      final json = await VisualCrossingApiClient().getWeather('London');
+      final json = await VisualCrossingApiClient()
+          .getWeatherByLongitudeLatitude(longitude, latitude);
       final jsonResponse = convert.jsonDecode(json) as Map<String, dynamic>;
       final dto = WeatherDto.fromJson(jsonResponse);
       return dto.toPlace();
