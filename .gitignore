@@ -57,3 +57,7 @@ linux/Runner/GeneratedPluginRegistrant.*
 
 # Exceptions allowed
 !pubspec.lock
+
+# .env
+.env
+env.g.dart
