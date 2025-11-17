@@ -11,7 +11,7 @@ class Place {
     this.address,
     this.timezone,
     this.tzoffset,
-    this.days,
+    this.forecastDaysList,
   });
 
   /// The latitude of the location.
@@ -33,5 +33,5 @@ class Place {
   final double? tzoffset;
 
   /// A list of daily weather forecasts for the location.
-  final List<Forecast>? days;
+  final List<Forecast>? forecastDaysList;
 }

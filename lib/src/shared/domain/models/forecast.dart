@@ -1,4 +1,5 @@
 import 'package:weather_app_pt/src/shared/domain/models/event.dart';
+import 'package:weather_app_pt/src/shared/domain/models/hour_forecast.dart';
 
 /// Represents the weather forecast data for a single day in the domain model.
 class Forecast {
@@ -38,6 +39,7 @@ class Forecast {
     this.description,
     this.icon,
     this.events,
+    this.hourForecast,
   });
 
   /// The date of the forecast.
@@ -141,4 +143,7 @@ class Forecast {
 
   /// List of weather events (e.g., hail).
   final List<Event>? events;
+
+  /// List of hour forecast
+  final List<HourForecast>? hourForecast;
 }

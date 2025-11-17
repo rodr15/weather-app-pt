@@ -1,6 +1,7 @@
 import 'package:weather_app_pt/src/infrastructure/visual_crossing/dto.dart';
 import 'package:weather_app_pt/src/shared/domain/models/event.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
+import 'package:weather_app_pt/src/shared/domain/models/hour_forecast.dart';
 import 'package:weather_app_pt/src/shared/domain/models/place.dart';
 
 /// Extension to map [WeatherDto] to the domain model [Place].
@@ -14,7 +15,7 @@ extension WeatherDtoMapper on WeatherDto {
       address: address,
       timezone: timezone,
       tzoffset: tzoffset,
-      days: days?.map((day) => day.toForecast()).toList(),
+      forecastDaysList: days?.map((day) => day.toForecast()).toList(),
     );
   }
 }
@@ -58,6 +59,41 @@ extension DayMapper on Day {
       description: description,
       icon: icon,
       events: events?.map((event) => event.toEvent()).toList(),
+      hourForecast: hours?.map((hour) => hour.toHourForecast()).toList(),
+    );
+  }
+}
+
+/// Extension to map [Hour] DTO to the domain model [HourForecast].
+extension HourMapper on Hour {
+  /// Converts the DTO to a domain [HourForecast] object.
+  HourForecast toHourForecast() {
+    return HourForecast(
+      datetime: datetime,
+      datetimeEpoch: datetimeEpoch,
+      temp: temp,
+      cloudcover: cloudcover,
+      conditions: conditions,
+      dew: dew,
+      feelslike: feelslike,
+      humidity: humidity,
+      icon: icon,
+      precip: precip,
+      precipprob: precipprob,
+      preciptype: preciptype,
+      pressure: pressure,
+      snow: snow,
+      snowdepth: snowdepth,
+      solarenergy: solarenergy,
+      solarradiation: solarradiation,
+      source: source,
+      stations: stations,
+      tzoffset: tzoffset,
+      uvindex: uvindex,
+      visibility: visibility,
+      winddir: winddir,
+      windgust: windgust,
+      windspeed: windspeed,
     );
   }
 }
