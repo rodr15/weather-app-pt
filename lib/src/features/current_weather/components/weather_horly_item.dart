@@ -67,7 +67,7 @@ class WeatherHourlyItem extends StatelessWidget {
         WeatherDetailItem(
           iconData: WeatherIconId.clearDay.materialIcon,
           iconColor: WeatherIconId.clearDay.iconColor,
-          value: forecast.uvindex.toString(),
+          value: forecast.uvindex?.toStringAsFixed(0) ?? '0',
           label: AppLocalizations.of(context)!.uvIndex,
         ),
 

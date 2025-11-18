@@ -10,7 +10,8 @@ import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
 class WeatherDetailsRow extends StatelessWidget {
   /// Creates a row to display weather details for a given forecast.
   const WeatherDetailsRow({
-    required this.forecast, super.key,
+    required this.forecast,
+    super.key,
   });
 
   /// The forecast data model used to populate the details.
@@ -40,7 +41,7 @@ class WeatherDetailsRow extends StatelessWidget {
           WeatherDetailItem(
             iconData: WeatherIconId.clearDay.materialIcon,
             iconColor: WeatherIconId.clearDay.iconColor,
-            value: forecast.uvindex.toString(),
+            value: forecast.uvindex?.toStringAsFixed(0) ?? '0',
             label: AppLocalizations.of(context)!.uvIndex,
           ),
 

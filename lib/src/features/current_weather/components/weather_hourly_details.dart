@@ -20,7 +20,6 @@ class WeatherHourlyDetails extends StatelessWidget {
         WeatherHourlyItem(forecast: hourForecast[12]),
         divider(),
         WeatherHourlyItem(forecast: hourForecast[20]),
-        divider(),
       ],
     );
   }

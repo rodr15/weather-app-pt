@@ -25,9 +25,9 @@ class BlurContainer extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.grey.withAlpha(80),
             border: Border.all(
-              color: Colors.white.withOpacity(0.4),
+              color: Colors.white.withAlpha(100),
             ),
           ),
           child: Padding(
