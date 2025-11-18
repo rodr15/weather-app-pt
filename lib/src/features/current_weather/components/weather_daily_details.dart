@@ -37,7 +37,6 @@ class WeatherDailyDetails extends StatelessWidget {
           ).toFormattedTime(context),
         ),
 
-        // Visual Separator
         VerticalDivider(
           color: Colors.white.withOpacity(0.4),
           thickness: 1,

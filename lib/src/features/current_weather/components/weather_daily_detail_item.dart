@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 class WeatherDailyDetailItem extends StatelessWidget {
   /// Creates a [WeatherDailyDetailItem] instance.
   const WeatherDailyDetailItem({
-    required this.icon, required this.iconColor, required this.label, required this.value, super.key,
+    required this.icon,
+    required this.iconColor,
+    required this.label,
+    required this.value,
+    super.key,
   });
 
   /// The icon data to display at the top of the item.
@@ -29,10 +33,9 @@ class WeatherDailyDetailItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Container for the icon (mimics your existing style)
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), // Slightly smaller radius
+            borderRadius: BorderRadius.circular(12),
             color: Colors.white,
           ),
           child: Padding(
@@ -44,8 +47,7 @@ class WeatherDailyDetailItem extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 6), // Spacing between icon and time/value
-        // Label/Value Text
+        const SizedBox(height: 6),
         Text(
           value,
           style: const TextStyle(

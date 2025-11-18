@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 class WeatherDetailItem extends StatelessWidget {
   /// Creates a [WeatherDetailItem].
   const WeatherDetailItem({
-    required this.iconData, required this.iconColor, required this.value, required this.label, super.key,
+    required this.iconData,
+    required this.iconColor,
+    required this.value,
+    required this.label,
+    super.key,
     this.valueSuffix = '',
   });
 
@@ -28,6 +32,7 @@ class WeatherDetailItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -74,6 +74,7 @@ class _DailyForecastsPageViewState
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 20, width: 1),
             Expanded(
               child: SizedBox(
                 child: PageView.builder(

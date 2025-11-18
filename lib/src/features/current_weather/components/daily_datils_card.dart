@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_pt/src/features/current_weather/components/weather_daily_details.dart';
+import 'package:weather_app_pt/src/features/current_weather/components/weather_hourly_details.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
 
 /// A widget that displays detailed forecast information, prioritizing
@@ -25,11 +26,6 @@ class DailyDetailsCard extends StatelessWidget {
     if (hourForecast == null || hourForecast.isEmpty) {
       return WeatherDailyDetails(forecast: forecast);
     }
-    return Center(
-      child: Text(
-        'Description: ${hourForecast.first}',
-        style: const TextStyle(color: Colors.white, fontSize: 20),
-      ),
-    );
+    return WeatherHourlyDetails(hourForecast: hourForecast);
   }
 }

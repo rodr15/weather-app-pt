@@ -151,10 +151,10 @@ class _SelectedForecastInfo extends StatelessWidget {
           ),
 
           WeatherDetailsRow(forecast: forecast),
-
           const Spacer(),
-          const Expanded(
-            child: BlurContainer(child: DailyForecastsPageView()),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.4,
+            child: const BlurContainer(child: DailyForecastsPageView()),
           ),
         ],
       ),
