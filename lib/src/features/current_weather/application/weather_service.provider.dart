@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_app_pt/src/features/current_weather/domain/currentweather.service.dart';
-import 'package:weather_app_pt/src/infrastructure/visual_crossing/service.impl.dart';
+import 'package:weather_app_pt/src/infrastructure/api/visual_crossing/service.impl.dart';
 
 part 'weather_service.provider.g.dart';
 
