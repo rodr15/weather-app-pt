@@ -33,7 +33,7 @@ class HourForecast {
   final String? datetime;
 
   /// The epoch time of the forecast hour.
-  final int? datetimeEpoch;
+  final double? datetimeEpoch;
 
   /// The average temperature for the hour.
   final double? temp;
@@ -51,13 +51,13 @@ class HourForecast {
   final double? precip;
 
   /// The probability of precipitation (0-100%).
-  final int? precipprob;
+  final double? precipprob;
 
   /// The amount of snowfall.
-  final int? snow;
+  final double? snow;
 
   /// The snow depth.
-  final int? snowdepth;
+  final double? snowdepth;
 
   /// The types of precipitation (e.g., 'rain', 'snow').
   final List<String>? preciptype;
@@ -69,7 +69,7 @@ class HourForecast {
   final double? windspeed;
 
   /// The wind direction in degrees.
-  final int? winddir;
+  final double? winddir;
 
   /// The atmospheric pressure.
   final double? pressure;
@@ -81,13 +81,13 @@ class HourForecast {
   final double? cloudcover;
 
   /// The solar radiation index.
-  final int? solarradiation;
+  final double? solarradiation;
 
   /// The solar energy amount.
   final double? solarenergy;
 
   /// The UV index for the hour.
-  final int? uvindex;
+  final double? uvindex;
 
   /// The general weather conditions summary.
   final String? conditions;
@@ -102,5 +102,5 @@ class HourForecast {
   final String? source;
 
   /// The timezone offset.
-  final int? tzoffset;
+  final double? tzoffset;
 }

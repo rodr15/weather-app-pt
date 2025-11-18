@@ -225,6 +225,13 @@ class Day {
               (x) => EventApi.fromJson(x as Map<String, dynamic>),
             ),
           ),
+    hours: json['hours'] == null
+        ? <Hour>[]
+        : List<Hour>.from(
+            (json['hours'] as Iterable<dynamic>).map(
+              (x) => Hour.fromJson(x as Map<String, dynamic>),
+            ),
+          ),
   );
 
   /// The date of the forecast.
@@ -514,122 +521,178 @@ class Station {
   };
 }
 
-/// Represents the weather forecast data for a single hour.
+/// Represents one hour of weather data coming from the API.
+///
+/// All numeric fields are doubles because the API returns numbers that
+/// may be integers or floating-point values.
+///
+/// This model is fully null-safe and compatible with very_good_analysis.
 class Hour {
-  /// Creates an [Hour] instance.
-  Hour({
+  /// Creates an instance from a raw JSON map.
+  factory Hour.fromJson(Map<String, dynamic> json) {
+    return Hour(
+      datetime: json['datetime'] as String?,
+      datetimeEpoch: (json['datetimeEpoch'] as num?)?.toDouble(),
+      temp: (json['temp'] as num?)?.toDouble(),
+      feelslike: (json['feelslike'] as num?)?.toDouble(),
+      humidity: (json['humidity'] as num?)?.toDouble(),
+      dew: (json['dew'] as num?)?.toDouble(),
+      precip: (json['precip'] as num?)?.toDouble(),
+      precipprob: (json['precipprob'] as num?)?.toDouble(),
+      snow: (json['snow'] as num?)?.toDouble(),
+      snowdepth: (json['snowdepth'] as num?)?.toDouble(),
+      preciptype: (json['preciptype'] as List<dynamic>?)
+          ?.map((e) => e.toString())
+          .toList(),
+      windgust: (json['windgust'] as num?)?.toDouble(),
+      windspeed: (json['windspeed'] as num?)?.toDouble(),
+      winddir: (json['winddir'] as num?)?.toDouble(),
+      pressure: (json['pressure'] as num?)?.toDouble(),
+      visibility: (json['visibility'] as num?)?.toDouble(),
+      cloudcover: (json['cloudcover'] as num?)?.toDouble(),
+      solarradiation: (json['solarradiation'] as num?)?.toDouble(),
+      solarenergy: (json['solarenergy'] as num?)?.toDouble(),
+      uvindex: (json['uvindex'] as num?)?.toDouble(),
+      conditions: json['conditions'] as String,
+      icon: json['icon'] as String,
+      stations: (json['stations'] as List<dynamic>?)
+          ?.map((e) => e.toString())
+          .toList(),
+      source: json['source'] as String,
+      tzoffset: (json['tzoffset'] as num?)?.toDouble(),
+    );
+  }
+
+  /// Creates an immutable hour weather record.
+  const Hour({
     this.datetime,
     this.datetimeEpoch,
     this.temp,
-    this.cloudcover,
-    this.conditions,
-    this.dew,
     this.feelslike,
     this.humidity,
-    this.icon,
+    this.dew,
     this.precip,
     this.precipprob,
-    this.preciptype,
-    this.pressure,
     this.snow,
     this.snowdepth,
-    this.solarenergy,
-    this.solarradiation,
-    this.source,
-    this.stations,
-    this.tzoffset,
-    this.uvindex,
-    this.visibility,
-    this.winddir,
+    this.preciptype,
     this.windgust,
     this.windspeed,
-    // ... otros campos
+    this.winddir,
+    this.pressure,
+    this.visibility,
+    this.cloudcover,
+    this.solarradiation,
+    this.solarenergy,
+    this.uvindex,
+    this.conditions,
+    this.icon,
+    this.stations,
+    this.source,
+    this.tzoffset,
   });
 
-  /// Creates an [Hour] instance from a JSON map.
-  factory Hour.fromJson() => Hour(
-    // ... implementación de fromJson
-  );
-
-  /// Converts the [Hour] instance to a JSON map.
-  Map<String, dynamic> toJson() => {
-    // ... implementación de toJson
-  };
-
-  // --- Campos ---
-
-  /// The date and time of the forecast hour (e.g., "14:00:00").
+  /// Local datetime string (ex: `"2024-03-27T14:00"`).
   final String? datetime;
 
-  /// The epoch time of the forecast hour.
-  final int? datetimeEpoch;
+  /// Epoch timestamp in seconds.
+  final double? datetimeEpoch;
 
-  /// The average temperature for the hour.
+  /// Temperature in °C.
   final double? temp;
 
-  /// The perceived temperature (feels like).
+  /// Feels-like temperature in °C.
   final double? feelslike;
 
-  /// The humidity percentage.
+  /// Relative humidity percentage.
   final double? humidity;
 
-  /// The dew point temperature.
+  /// Dew point temperature in °C.
   final double? dew;
 
-  /// The precipitation amount.
+  /// Precipitation volume in mm.
   final double? precip;
 
-  /// The probability of precipitation (0-100%).
-  final int? precipprob;
+  /// Probability of precipitation (0–100).
+  final double? precipprob;
 
-  /// The amount of snowfall.
-  final int? snow;
+  /// Snowfall in mm.
+  final double? snow;
 
-  /// The snow depth.
-  final int? snowdepth;
+  /// Snow depth in mm.
+  final double? snowdepth;
 
-  /// The types of precipitation (e.g., 'rain', 'snow').
+  /// List of precipitation types (rain / snow / etc.).
   final List<String>? preciptype;
 
-  /// The maximum wind gust speed.
+  /// Maximum wind gust speed in km/h.
   final double? windgust;
 
-  /// The average wind speed.
+  /// Wind speed in km/h.
   final double? windspeed;
 
-  /// The wind direction in degrees.
-  final int? winddir;
+  /// Wind direction in degrees.
+  final double? winddir;
 
-  /// The atmospheric pressure.
+  /// Atmospheric pressure in hPa.
   final double? pressure;
 
-  /// The visibility distance.
+  /// Visibility distance in km.
   final double? visibility;
 
-  /// The cloud cover percentage.
+  /// Cloud cover percentage.
   final double? cloudcover;
 
-  /// The solar radiation index.
-  final int? solarradiation;
+  /// Solar radiation (W/m²).
+  final double? solarradiation;
 
-  /// The solar energy amount.
+  /// Solar energy (MJ/m²).
   final double? solarenergy;
 
-  /// The UV index for the hour.
-  final int? uvindex;
+  /// UV Index (0–11).
+  final double? uvindex;
 
-  /// The general weather conditions summary.
+  /// Text representation of weather conditions.
   final String? conditions;
 
-  /// The icon identifier for the weather condition.
+  /// Icon describing the weather visually.
   final String? icon;
 
-  /// The list of station IDs used for the data.
+  /// Weather station IDs contributing data.
   final List<String>? stations;
 
-  /// The data source.
+  /// Source of the weather data.
   final String? source;
 
-  /// The timezone offset.
-  final int? tzoffset;
+  /// Timezone offset from UTC (seconds).
+  final double? tzoffset;
+
+  /// Converts this model into a JSON map.
+  Map<String, dynamic> toJson() => {
+    'datetime': datetime,
+    'datetimeEpoch': datetimeEpoch,
+    'temp': temp,
+    'feelslike': feelslike,
+    'humidity': humidity,
+    'dew': dew,
+    'precip': precip,
+    'precipprob': precipprob,
+    'snow': snow,
+    'snowdepth': snowdepth,
+    'preciptype': preciptype,
+    'windgust': windgust,
+    'windspeed': windspeed,
+    'winddir': winddir,
+    'pressure': pressure,
+    'visibility': visibility,
+    'cloudcover': cloudcover,
+    'solarradiation': solarradiation,
+    'solarenergy': solarenergy,
+    'uvindex': uvindex,
+    'conditions': conditions,
+    'icon': icon,
+    'stations': stations,
+    'source': source,
+    'tzoffset': tzoffset,
+  };
 }
