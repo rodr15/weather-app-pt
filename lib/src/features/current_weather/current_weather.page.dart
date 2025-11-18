@@ -110,6 +110,7 @@ class _SelectedForecastInfo extends StatelessWidget {
                           255,
                         ),
                         fontSize: 150,
+                        letterSpacing: -5,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -120,7 +121,7 @@ class _SelectedForecastInfo extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: BlurContainer(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -150,7 +151,10 @@ class _SelectedForecastInfo extends StatelessWidget {
             ),
           ),
 
-          WeatherDetailsRow(forecast: forecast),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            child: WeatherDetailsRow(forecast: forecast),
+          ),
           const Spacer(),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,

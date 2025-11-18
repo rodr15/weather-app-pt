@@ -9,6 +9,7 @@ class BlurContainer extends StatelessWidget {
     required this.child,
     super.key,
     this.borderRadius = 20.0,
+    this.padding,
   });
 
   /// The content to be placed inside the blurred area.
@@ -16,6 +17,9 @@ class BlurContainer extends StatelessWidget {
 
   /// The radius for the container's rounded corners. Defaults to 20.0.
   final double borderRadius;
+
+  /// Padding optional
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +35,12 @@ class BlurContainer extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
+            padding:
+                padding ??
+                const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
             child: child,
           ),
         ),

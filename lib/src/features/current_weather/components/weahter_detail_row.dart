@@ -20,6 +20,10 @@ class WeatherDetailsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlurContainer(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 20,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -31,12 +35,7 @@ class WeatherDetailsRow extends StatelessWidget {
             label: AppLocalizations.of(context)!.chanceOfRain,
           ),
 
-          VerticalDivider(
-            color: Colors.white.withOpacity(0.4),
-            thickness: 1,
-            indent: 10,
-            endIndent: 10,
-          ),
+          divider(),
 
           WeatherDetailItem(
             iconData: WeatherIconId.clearDay.materialIcon,
@@ -45,12 +44,7 @@ class WeatherDetailsRow extends StatelessWidget {
             label: AppLocalizations.of(context)!.uvIndex,
           ),
 
-          VerticalDivider(
-            color: Colors.white.withOpacity(0.4),
-            thickness: 1,
-            indent: 10,
-            endIndent: 10,
-          ),
+          divider(),
 
           WeatherDetailItem(
             iconData: WeatherIconId.wind.materialIcon,
@@ -61,6 +55,15 @@ class WeatherDetailsRow extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  VerticalDivider divider() {
+    return VerticalDivider(
+      color: Colors.white.withOpacity(0.4),
+      thickness: 1,
+      indent: 10,
+      endIndent: 10,
     );
   }
 }
