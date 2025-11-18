@@ -57,10 +57,11 @@ linux/Runner/GeneratedPluginRegistrant.*
 
 # Exceptions allowed
 !pubspec.lock
+# Generated
+*.g.dart
 
 # .env
 .env
-env.g.dart
 
 #Dummy data
 */dummy_data
