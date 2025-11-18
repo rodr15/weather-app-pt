@@ -1,4 +1,4 @@
-import 'package:weather_app_pt/src/infrastructure/visual_crossing/dto.dart';
+import 'package:weather_app_pt/src/infrastructure/api/visual_crossing/dto.dart';
 import 'package:weather_app_pt/src/shared/domain/models/event.dart';
 import 'package:weather_app_pt/src/shared/domain/models/forecast.dart';
 import 'package:weather_app_pt/src/shared/domain/models/hour_forecast.dart';

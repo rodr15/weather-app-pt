@@ -1,9 +1,9 @@
 import 'dart:convert' as convert;
 
 import 'package:weather_app_pt/src/features/current_weather/domain/currentweather.service.dart';
-import 'package:weather_app_pt/src/infrastructure/visual_crossing/client.dart';
-import 'package:weather_app_pt/src/infrastructure/visual_crossing/dto.dart';
-import 'package:weather_app_pt/src/infrastructure/visual_crossing/dto.mapper.dart';
+import 'package:weather_app_pt/src/infrastructure/api/visual_crossing/client.dart';
+import 'package:weather_app_pt/src/infrastructure/api/visual_crossing/dto.dart';
+import 'package:weather_app_pt/src/infrastructure/api/visual_crossing/dto.mapper.dart';
 import 'package:weather_app_pt/src/shared/domain/models/place.dart';
 
 class WeatherServiceImpl implements WeatherService {
